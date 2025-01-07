@@ -28,7 +28,7 @@ public class Handler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         list.add(session);
-        log.info(session + " 클라이언트 접속");
+        log.info(session.getId()+ " 클라이언트 접속");
     }
     /* Client가 접속 해제 시 호출되는 메서드드 */
 

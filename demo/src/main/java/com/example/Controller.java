@@ -11,7 +11,7 @@ public class Controller {
     @GetMapping("/")
     public String chatGET(){
         log.info("@ChatController, chat GET()");
-        return "forward:/websocket.html";
+        return "/websocket.html";
     }
  
 }
