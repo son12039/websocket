@@ -18,7 +18,7 @@ public class Handler extends TextWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         String payload = message.getPayload();
-        log.info("payload : " + payload);
+        log.info("payload : " + payload + list.size());
         //페이로드란 전송되는 데이터를 의미한다.
         for(WebSocketSession sess: list) {
             sess.sendMessage(message);
@@ -29,12 +29,15 @@ public class Handler extends TextWebSocketHandler {
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         list.add(session);
         log.info(session.getId()+ " 클라이언트 접속");
+        for (WebSocketSession sess : list) {
+            sess.sendMessage(new TextMessage("!@3"));
+        }
     }
     /* Client가 접속 해제 시 호출되는 메서드드 */
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        log.info(session + " 클라이언트 접속 해제");
+        log.info(session.getId() + " 클라이언트 접속 해제" + list.size());
         list.remove(session);
     }
 }
